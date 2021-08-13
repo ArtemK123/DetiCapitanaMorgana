@@ -1,6 +1,6 @@
 import { useState } from "react";
 import BackendService from "../../services/backendService";
-import ProductComponent from "./ProductComponent";
+import InformationTab from "./InformationTab";
 import ProductNavigation from "./ProductNavigation";
 
 const fetchProductInfoAsync = async (setProductInfo) => {
@@ -22,6 +22,6 @@ export default function ProductPage() {
   return (
     <div>
       <ProductNavigation/>
-      {productInfo === undefined ? (<p>Loading...</p>) : (<ProductComponent productInfo={productInfo}/>)}
+      {productInfo === undefined ? (<p>Loading...</p>) : (<InformationTab productInfo={productInfo}/>)}
     </div>);
 }
