@@ -39,6 +39,9 @@ export default function InformationTab({productInfo}) {
             <Typography variant="body1">{productInfo.BestBeforeDate}</Typography>
           </Grid>
         </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h6" component="p">Вага: {productInfo.Weight}</Typography>
+        </Grid>
         <Grid item xs={12} container spacing={3} justifyContent="space-evenly">
           <Grid container item xs={12}>
             <Grid item xs={1}>
