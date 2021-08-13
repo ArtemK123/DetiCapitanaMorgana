@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BackendService from "../../services/backendService";
+import ProductComponent from "./ProductComponent";
 import ProductNavigation from "./ProductNavigation";
 
 const fetchProductInfoAsync = async (setProductInfo) => {
@@ -11,13 +12,6 @@ const fetchProductInfoAsync = async (setProductInfo) => {
   setProductInfo(fetchedProductInfo);
 }
 
-const createProductComponent = (productInfo) => (
-  <div>
-    <h3>{productInfo.ProductName}</h3>
-    <p>Id: {productInfo.Id}</p>
-    <p>Ingredients:<br/>{productInfo.Ingredients}</p>
-  </div>);
-
 export default function ProductPage() {
   const [productInfo, setProductInfo] = useState(undefined);
 
@@ -28,6 +22,6 @@ export default function ProductPage() {
   return (
     <div>
       <ProductNavigation/>
-      {productInfo === undefined ? (<p>Loading...</p>) : createProductComponent(productInfo)}
+      {productInfo === undefined ? (<p>Loading...</p>) : (<ProductComponent productInfo={productInfo}/>)}
     </div>);
 }
