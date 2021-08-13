@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import { useState } from "react";
 import BackendService from "../../services/backendService";
 import InformationTab from "./InformationTab/InformationTab";
@@ -31,10 +31,10 @@ export default function ProductPage() {
       return (<InformationTab productInfo={productInfo}/>);
     }
     if (currentTab === 1) {
-      return (<IngredientsTab></IngredientsTab>)
+      return (<IngredientsTab productInfo={productInfo}></IngredientsTab>)
     }
     if (currentTab === 2) {
-      return (<NutritionTab></NutritionTab>)
+      return (<NutritionTab productInfo={productInfo}></NutritionTab>)
     }
 
     setCurrentTab(0);
@@ -44,6 +44,8 @@ export default function ProductPage() {
   return (
     <div>
       <CurrentTabSelector currentTab={currentTab} setCurrentTab={setCurrentTab}/>
-      {generateCurrentTab()}
+      <Box mx={2}>
+        {generateCurrentTab()}
+      </Box>
     </div>);
 }

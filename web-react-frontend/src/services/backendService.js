@@ -2,7 +2,7 @@ const productInfo = {
   "Id": 12,
   "GuidIdentifier": "guid",
   "ProductName": "Батончик Баунті",
-  "Ingredients": "Цукор, кокосова струшка, Е200, Е201, райське насолодження",
+  "Ingredients": ['цукор', 'кокосова струшка', 'шоколад', 'Е200', 'Е201', 'райське насолодження'],
   "ManufactureDate": "10.03.2021",
   "BestBeforeDate": "10.03.2022"
 };

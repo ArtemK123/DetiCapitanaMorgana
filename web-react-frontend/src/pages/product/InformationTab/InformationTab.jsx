@@ -1,4 +1,4 @@
-import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
 import Image from 'material-ui-image';
 import bountyImage from './bounty.jpg';
 import WarningIcon from '@material-ui/icons/Warning';
@@ -19,13 +19,10 @@ export default function InformationTab({productInfo}) {
   const styles = useStyles();
 
   return (
-    <Box mx={2}>
       <Grid container spacing={2} direction="column">
-        <Grid item xs={12} container direction="column" spacing={2}>
-          <Grid item xs={1}></Grid>
-          <Grid item xs={11}>
-            <Typography  variant="h4">{productInfo.ProductName}</Typography>
-          </Grid>
+        <Grid item></Grid>
+        <Grid item xs={12}>
+          <Typography variant="h4">{productInfo.ProductName}</Typography>
         </Grid>
         <Grid item xs={12} container justifyContent="center">
           <Grid item xs={8}>
@@ -62,6 +59,5 @@ export default function InformationTab({productInfo}) {
             </Grid>
           </Grid>  
         </Grid>
-      </Grid>
-    </Box>);
+      </Grid>);
 }
