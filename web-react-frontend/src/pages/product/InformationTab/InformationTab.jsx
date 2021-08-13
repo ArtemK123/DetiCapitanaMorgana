@@ -1,4 +1,4 @@
-import { Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import Image from 'material-ui-image';
 import bountyImage from './bounty.jpg';
 import WarningIcon from '@material-ui/icons/Warning';
@@ -26,7 +26,9 @@ export default function InformationTab({productInfo}) {
         </Grid>
         <Grid item xs={12} container justifyContent="center">
           <Grid item xs={8}>
-            <Image src={bountyImage}/>
+            <Box maxWidth="400px">
+              <Image src={bountyImage}/>
+            </Box>
           </Grid>
         </Grid>
         <Grid item xs={12} container justifyContent="space-evenly">
