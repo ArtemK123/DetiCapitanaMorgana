@@ -1,0 +1,12 @@
+﻿[
+  {
+    "Id": 12,
+    "GuidIdentifier": "guid",
+    "ProductName": "ProductName",
+    "Ingredients": [
+      "IngredientsTest"
+    ],
+    "ManufactureDate": "2016-02-28T14:53:04",
+    "BestBeforeDate": "2016-02-28T14:53:04"
+  }
+]
