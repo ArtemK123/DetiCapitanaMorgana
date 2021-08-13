@@ -39,15 +39,15 @@ export default function Navigation() {
           <List>
             <ListItem button component={Link} to={"/"}>
               <ListItemIcon><HomeIcon/></ListItemIcon>
-              <ListItemText primary={"Home"} />
+              <ListItemText primary={"Початкова сторінка"} />
             </ListItem>
             <ListItem button component={Link} to={"/login"}>
               <ListItemIcon><AccountBoxIcon/></ListItemIcon>
-              <ListItemText primary={"Login"} />
+              <ListItemText primary={"Вхід в обліковий запис"} />
             </ListItem>
             <ListItem button component={Link} to={"/register"}>
               <ListItemIcon><SupervisorAccountIcon/></ListItemIcon>
-              <ListItemText primary={"Register"} />
+              <ListItemText primary={"Створення облікового запису"} />
             </ListItem>
           </List>
         </div>

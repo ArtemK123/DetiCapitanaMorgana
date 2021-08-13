@@ -16,11 +16,11 @@ export default function Landing() {
     <Grid container>
       <Grid container>
         <Typography variant="h5" gutterBottom>
-          YouQuality - check you meal
+          YouQuality - перевір свою страву
         </Typography>
       </Grid>
       <Grid container direction="row" justifyContent="flex-start" alignItems="center">
-        <TextField id="standard-search" label="Search field" type="search" value={searchName} onChange={event => setSearchName(event.target.value)}/>
+        <TextField id="standard-search" label="Пошук" type="search" value={searchName} onChange={event => setSearchName(event.target.value)}/>
         <SearchIcon onClick={handleSearch}/>
       </Grid>
     </Grid>
