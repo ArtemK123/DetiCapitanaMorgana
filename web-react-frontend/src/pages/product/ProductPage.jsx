@@ -1,6 +1,6 @@
 import { useState } from "react";
 import BackendService from "../../services/backendService";
-import InformationTab from "./InformationTab";
+import InformationTab from "./InformationTab/InformationTab";
 import ProductNavigation from "./ProductNavigation";
 
 const fetchProductInfoAsync = async (setProductInfo) => {
