@@ -4,7 +4,7 @@ namespace WebApi.Access
 {
     public interface IUserAuthenticationProvider
     {
-        User Login(string login, string password);
+        User GetUser(string login, string password);
 
         void Register(User user);
     }

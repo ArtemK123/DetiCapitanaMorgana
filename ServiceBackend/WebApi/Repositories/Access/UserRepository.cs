@@ -28,6 +28,7 @@ namespace WebApi.Repositories.Access
 
         public void AddUser(UserDatabaseDto userDatabaseDto)
         {
+            userDatabaseDto.Id = users.Count + 1;
             users.Add(userDatabaseDto);
             WriteDatabaseFile();
         }

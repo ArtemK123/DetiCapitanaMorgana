@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 
 using Microsoft.OpenApi.Models;
 using WebApi.Access;
+using WebApi.IngredientsSettings;
 using WebApi.Products;
 using WebApi.Repositories;
 using WebApi.Repositories.Access;
@@ -30,6 +31,8 @@ namespace WebApi
             services.AddScoped<IUserAuthenticationProvider, UserAuthenticationProvider>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IProductDetailsRepository, ProductDetailsRepository>();
+            services.AddScoped<IUserDtoConverter, UserDtoConverter>();
+            services.AddScoped<IIngredientsSettingsCollisionsProvider, IngredientsSettingsCollisionsProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

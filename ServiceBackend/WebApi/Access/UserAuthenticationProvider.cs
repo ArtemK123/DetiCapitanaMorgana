@@ -7,42 +7,28 @@ namespace WebApi.Access
     public class UserAuthenticationProvider : IUserAuthenticationProvider
     {
         private readonly IUserRepository userRepository;
+        private readonly IUserDtoConverter userDtoConverter;
 
-        public UserAuthenticationProvider(IUserRepository userRepository)
+        public UserAuthenticationProvider(IUserRepository userRepository, IUserDtoConverter userDtoConverter)
         {
             this.userRepository = userRepository;
+            this.userDtoConverter = userDtoConverter;
         }
 
-        public User Login(string login, string password)
+        public User GetUser(string login, string password)
         {
-            return ConvertToClientDtos(userRepository.GetUserByCredentials(login, password));
+            UserDatabaseDto userDatabaseDto = userRepository.GetUserByCredentials(login, password);
+            if (userDatabaseDto == null)
+            {
+                return null;
+            }
+
+            return userDtoConverter.ConvertToClientDtos(userDatabaseDto);
         }
 
         public void Register(User user)
         {
-            userRepository.AddUser(ConvertToDatabaseDtos(user));
+            userRepository.AddUser(userDtoConverter.ConvertToDatabaseDtos(user));
         }
-
-        private User ConvertToClientDtos(UserDatabaseDto userDatabaseDto)
-            => new User
-            {
-                Id = userDatabaseDto.Id,
-                IngredientExceptionSettings = userDatabaseDto.IngredientExceptionSettings,
-                Login = userDatabaseDto.Login,
-                Name = userDatabaseDto.Name,
-                Password = userDatabaseDto.Password,
-                Surname = userDatabaseDto.Surname
-            };
-
-        private UserDatabaseDto ConvertToDatabaseDtos(User userDatabaseDto)
-            => new UserDatabaseDto
-            {
-                Id = userDatabaseDto.Id,
-                IngredientExceptionSettings = userDatabaseDto.IngredientExceptionSettings,
-                Login = userDatabaseDto.Login,
-                Name = userDatabaseDto.Name,
-                Password = userDatabaseDto.Password,
-                Surname = userDatabaseDto.Surname
-            };
     }
 }

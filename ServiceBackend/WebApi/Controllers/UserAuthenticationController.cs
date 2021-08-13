@@ -20,10 +20,10 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult Login(string login, string password)
         {
-            User user = userAuthenticationProvider.Login(login, password);
+            User user = userAuthenticationProvider.GetUser(login, password);
             if (user != null)
             {
-                Response.Cookies.Append("authToken", login + " " + password);
+                Response.Cookies.Append(AuthCookieKey, user.Id.ToString());
                 return new JsonResult(JsonSerializer.Serialize(user));
             }
 
