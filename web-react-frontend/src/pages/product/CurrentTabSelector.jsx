@@ -18,18 +18,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProductNavigation() {
+export default function CurrentTabSelector({currentTab, setCurrentTab}) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleChange = (_, newValue) => {
+    setCurrentTab(newValue);
   };
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+        <Tabs value={currentTab} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Інформація" {...a11yProps(0)} />
           <Tab label="Склад" {...a11yProps(1)} />
           <Tab label="Поживна цінність" {...a11yProps(2)} />

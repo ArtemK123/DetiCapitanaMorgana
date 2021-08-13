@@ -1,7 +1,10 @@
+import { Typography } from "@material-ui/core";
 import { useState } from "react";
 import BackendService from "../../services/backendService";
 import InformationTab from "./InformationTab/InformationTab";
-import ProductNavigation from "./ProductNavigation";
+import IngredientsTab from "./IngregientsTab/IngredientsTab";
+import NutritionTab from "./NutritionTab/NutritionTab";
+import CurrentTabSelector from "./CurrentTabSelector";
 
 const fetchProductInfoAsync = async (setProductInfo) => {
   const productIdSearchParamKey = "id";
@@ -14,14 +17,33 @@ const fetchProductInfoAsync = async (setProductInfo) => {
 
 export default function ProductPage() {
   const [productInfo, setProductInfo] = useState(undefined);
+  const [currentTab, setCurrentTab] = useState(0);
 
   if (productInfo === undefined) {
     fetchProductInfoAsync(setProductInfo);
   }
 
+  const generateCurrentTab = () => {
+    if (productInfo === undefined) {
+      return (<Typography variant="body1">Loading...</Typography>);
+    }
+    if (currentTab === 0) {
+      return (<InformationTab productInfo={productInfo}/>);
+    }
+    if (currentTab === 1) {
+      return (<IngredientsTab></IngredientsTab>)
+    }
+    if (currentTab === 2) {
+      return (<NutritionTab></NutritionTab>)
+    }
+
+    setCurrentTab(0);
+    return undefined;
+  }
+
   return (
     <div>
-      <ProductNavigation/>
-      {productInfo === undefined ? (<p>Loading...</p>) : (<InformationTab productInfo={productInfo}/>)}
+      <CurrentTabSelector currentTab={currentTab} setCurrentTab={setCurrentTab}/>
+      {generateCurrentTab()}
     </div>);
 }
