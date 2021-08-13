@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import BackendService from "../../services/backendService";
 
-export default function ProductInfo() {
+export default function ProductPage() {
   const [productInfo, setProductInfo] = useState(undefined);
 
   if (productInfo === undefined) {

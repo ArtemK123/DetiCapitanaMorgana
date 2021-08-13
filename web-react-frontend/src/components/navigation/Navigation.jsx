@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   list: {
@@ -23,7 +25,7 @@ const useStyles = makeStyles({
 
 export default function Navigation() {
   const classes = useStyles();
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
@@ -35,12 +37,18 @@ export default function Navigation() {
       <Drawer anchor="left" open={isOpen} onClose={toggleDrawer}>
         <div className={classes.list}>
           <List>
-            {['Product', 'Search', 'Sign in', 'Sign up'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+            <ListItem button component={Link} to={"/"}>
+              <ListItemIcon><HomeIcon/></ListItemIcon>
+              <ListItemText primary={"Home"} />
+            </ListItem>
+            <ListItem button component={Link} to={"/login"}>
+              <ListItemIcon><AccountBoxIcon/></ListItemIcon>
+              <ListItemText primary={"Login"} />
+            </ListItem>
+            <ListItem button component={Link} to={"/register"}>
+              <ListItemIcon><SupervisorAccountIcon/></ListItemIcon>
+              <ListItemText primary={"Register"} />
+            </ListItem>
           </List>
         </div>
       </Drawer>
