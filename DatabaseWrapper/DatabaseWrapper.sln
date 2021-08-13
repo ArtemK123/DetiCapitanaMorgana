@@ -2,6 +2,13 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{F1C8393B-60D3-4189-B537-098DA221DE79}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildConfiguration", "BuildConfiguration", "{0C3CD1DD-30B3-4B4B-849F-7C9512E2000A}"
+ProjectSection(SolutionItems) = preProject
+	Custom.ruleset = Custom.ruleset
+	Directory.Build.props = Directory.Build.props
+	stylecop.json = stylecop.json
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
