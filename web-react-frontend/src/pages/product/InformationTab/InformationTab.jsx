@@ -20,26 +20,29 @@ export default function InformationTab({productInfo}) {
 
   return (
     <Box mx={2}>
-      <Box my={2}>
-        <Typography  variant="h4">{productInfo.ProductName}</Typography> 
-      </Box>
-      <Grid container justifyContent="center">
-        <Grid item xs={8}>
-          <Image src={bountyImage}/>
+      <Grid container spacing={2} direction="column">
+        <Grid item xs={12} container direction="column" spacing={2}>
+          <Grid item xs={1}></Grid>
+          <Grid item xs={11}>
+            <Typography  variant="h4">{productInfo.ProductName}</Typography>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid container justifyContent="space-evenly">
-        <Grid container item xs={5} justifyContent="space-evenly" className={styles.dateBox}>
-          <Typography variant="body2">Дата виробництва</Typography>
-          <Typography variant="body1">{productInfo.ManufactureDate}</Typography>
+        <Grid item xs={12} container justifyContent="center">
+          <Grid item xs={8}>
+            <Image src={bountyImage}/>
+          </Grid>
         </Grid>
-        <Grid container item xs={5} justifyContent="space-evenly" className={styles.dateBox}>
-          <Typography variant="body2">Вжити до</Typography>
-          <Typography variant="body1">{productInfo.BestBeforeDate}</Typography>
+        <Grid item xs={12} container justifyContent="space-evenly">
+          <Grid container item xs={5} justifyContent="space-evenly" className={styles.dateBox}>
+            <Typography variant="body2">Дата виробництва</Typography>
+            <Typography variant="body1">{productInfo.ManufactureDate}</Typography>
+          </Grid>
+          <Grid container item xs={5} justifyContent="space-evenly" className={styles.dateBox}>
+            <Typography variant="body2">Вжити до</Typography>
+            <Typography variant="body1">{productInfo.BestBeforeDate}</Typography>
+          </Grid>
         </Grid>
-      </Grid>
-      <Box mt={2}>
-        <Grid container spacing={3} justifyContent="space-evenly">
+        <Grid item xs={12} container spacing={3} justifyContent="space-evenly">
           <Grid container item xs={12}>
             <Grid item xs={1}>
               <WarningIcon></WarningIcon>
@@ -59,6 +62,6 @@ export default function InformationTab({productInfo}) {
             </Grid>
           </Grid>  
         </Grid>
-      </Box>
+      </Grid>
     </Box>);
 }
