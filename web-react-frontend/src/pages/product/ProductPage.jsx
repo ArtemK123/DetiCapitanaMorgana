@@ -23,7 +23,6 @@ export default function ProductPage() {
       <h3>{productInfo.ProductName}</h3>
       <p>Id: {productInfo.Id}</p>
       <p>Ingredients:<br/>{productInfo.Ingredients}</p>
-      <Link to="/">Go to landing</Link>
     </div>
   );
 }
