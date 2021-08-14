@@ -107,4 +107,10 @@ export default class BackendService {
     localStorage.removeItem("isLoggedIn");
     return Promise.resolve();
   }
+
+  async checkBannedIngredientsInProductAsync(productId) {
+    const product = await this.getProductAsync(productId);
+    const bannedIngredientsInProduct = product.Ingredients.filter(ingredient => this.bannedIngredients.includes(ingredient));
+    return Promise.resolve(bannedIngredientsInProduct);
+  }
 }

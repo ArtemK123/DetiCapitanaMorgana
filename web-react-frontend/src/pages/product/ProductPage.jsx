@@ -5,7 +5,6 @@ import InformationTab from "./InformationTab/InformationTab";
 import IngredientsTab from "./IngregientsTab/IngredientsTab";
 import NutritionTab from "./NutritionTab/NutritionTab";
 import CurrentTabSelector from "./CurrentTabSelector";
-import isUserAuthenticated from "../../services/isUserAuthenticated";
 
 const fetchProductInfoAsync = async (setProductInfo) => {
   const productIdSearchParamKey = "id";
@@ -16,8 +15,7 @@ const fetchProductInfoAsync = async (setProductInfo) => {
   setProductInfo(fetchedProductInfo);
 }
 
-export default function ProductPage(props) {
-  props.setIsAuthenticated(isUserAuthenticated())
+export default function ProductPage({isUserAuthenticated}) {
   const [productInfo, setProductInfo] = useState(undefined);
   const [currentTab, setCurrentTab] = useState(0);
 
@@ -30,7 +28,7 @@ export default function ProductPage(props) {
       return (<Typography variant="body1">Loading...</Typography>);
     }
     if (currentTab === 0) {
-      return (<InformationTab productInfo={productInfo}/>);
+      return (<InformationTab productInfo={productInfo} isUserAuthenticated={isUserAuthenticated}/>);
     }
     if (currentTab === 1) {
       return (<IngredientsTab productInfo={productInfo}></IngredientsTab>)

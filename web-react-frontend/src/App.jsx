@@ -25,7 +25,7 @@ function App() {
           <RegisterPage />
         </Route>
         <Route path="/product">
-          <ProductPage setIsAuthenticated={setIsAuthenticated}/>
+          <ProductPage isUserAuthenticated={isAuthenticated}/>
         </Route>
         <Route path="/rules">
           <RulesPage setIsAuthenticated={setIsAuthenticated}/>
