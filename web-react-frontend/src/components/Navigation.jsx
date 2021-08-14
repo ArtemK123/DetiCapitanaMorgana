@@ -10,6 +10,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import {Link} from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const useStyles = makeStyles({
     root: {
@@ -35,9 +36,19 @@ export default function Navigation({isAuthenticated}) {
                 <div className={classes.list}>
                     <List>
                         <ListItem button component={Link} to={"/"}>
-                            <ListItemIcon><HomeIcon/></ListItemIcon>
-                            <ListItemText primary={"Початкова сторінка"}/>
+                          <ListItemIcon><HomeIcon/></ListItemIcon>
+                          <ListItemText primary={"Початкова сторінка"}/>
                         </ListItem>
+                        {isAuthenticated && 
+                        <ListItem button component={Link} to={"/rules"}>
+                          <ListItemIcon><AccountBoxIcon/></ListItemIcon>
+                          <ListItemText primary={"Керування небажаними складовими"}/>
+                        </ListItem>}
+                        {isAuthenticated && 
+                        <ListItem button component={Link} to={"/logout"}>
+                          <ListItemIcon><ExitToAppIcon/></ListItemIcon>
+                          <ListItemText primary={"Вийти з облікового запису"}/>
+                        </ListItem>}
                         {!isAuthenticated &&
                         <ListItem button component={Link} to={"/login"}>
                             <ListItemIcon><AccountBoxIcon/></ListItemIcon>

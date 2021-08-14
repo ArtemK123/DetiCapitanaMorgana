@@ -101,4 +101,10 @@ export default class BackendService {
         return user.Password === password && user.Login === login;
     }))
   }
+
+  async logoutAsync() {
+    localStorage.removeItem("user");
+    localStorage.removeItem("isLoggedIn");
+    return Promise.resolve();
+  }
 }

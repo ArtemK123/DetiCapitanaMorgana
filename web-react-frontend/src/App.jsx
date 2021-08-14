@@ -9,6 +9,7 @@ import RegisterPage from './pages/register/RegisterPage';
 import RulesPage from './pages/rules/RulesPage';
 import {useState} from "react";
 import isUserAuthenticated from "./services/isUserAuthenticated";
+import LogoutComponent from './components/LogoutComponent';
 
 function App() {
   let [isAuthenticated, setIsAuthenticated] = useState(isUserAuthenticated());
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path="/rules">
           <RulesPage setIsAuthenticated={setIsAuthenticated}/>
+        </Route>
+        <Route path="/logout">
+          <LogoutComponent setIsAuthenticated={setIsAuthenticated}/>
         </Route>
         <Route path="/">
           <Landing />
