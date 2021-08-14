@@ -61,8 +61,6 @@ const products = [
   }
 ];
 
-const rules = ["цукор", "кофеїн"];
-
 let users = [
     {
       Id:1,
@@ -75,13 +73,27 @@ let users = [
 ]
 
 export default class BackendService {
+  constructor() {
+    this.bannedIngredients = ["цукор", "кофеїн"];
+  }
+
   async getProductAsync(id) {
     const product = products.find(currentProduct => currentProduct.Id === id);
     return Promise.resolve({ ...product, "Id": id });
   }
 
-  async getRules() {
-    return Promise.resolve(rules);
+  async addBannedIngredientAsync(ingredient) {
+    this.bannedIngredients.push(ingredient);
+    return Promise.resolve();
+  }
+
+  async getBannedIngredientsAsync() {
+    return Promise.resolve(this.bannedIngredients);
+  }
+
+  async deleteBannedIngredientAsync(ingredient) {
+    this.bannedIngredients = this.bannedIngredients.filter(elem => elem !== ingredient);
+    return Promise.resolve();
   }
 
   async login(login, password){
