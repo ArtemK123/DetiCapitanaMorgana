@@ -1,4 +1,4 @@
-import { Box, Grid, IconButton, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Typography } from "@material-ui/core";
+import { Box, Grid, IconButton, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, TextField, Typography } from "@material-ui/core";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import Loader from "../../components/Loader";
@@ -7,9 +7,14 @@ import isUserAuthenticated from "../../services/isUserAuthenticated";
 import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import DoneIcon from '@material-ui/icons/Done';
+import ClearIcon from '@material-ui/icons/Clear';
 
 export default function RulesPage() {
   const [bannedIngredients, setBannedIngredients] = useState(undefined);
+  const [isNewIngredientInputShown, setIsNewIngredientInputShown] = useState(false);
+  const [newIngredient, setNewIngredient] = useState("");
+
   const backendService = new BackendService();
 
   if (!isUserAuthenticated()) {
@@ -49,18 +54,9 @@ export default function RulesPage() {
                 </ListItem>
               )}
             </List>
-            <Box onClick={() => handleAddIngredient()}>
-              <Grid container spacing={1} alignItems="center">
-                <Grid item>
-                  <AddCircleIcon/>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body1">Додати складову</Typography>
-                </Grid>
-              </Grid>
-            </Box>
           </Box>
         </Grid>
+        {isNewIngredientInputShown ? generateNewIngredientInput() : generateShowIngredientInputButton()}
       </Grid>
     </Box>);
 
@@ -70,12 +66,46 @@ export default function RulesPage() {
   }
 
   function handleAddIngredient() {
-    backendService.addBannedIngredientAsync("Test")
+    backendService.addBannedIngredientAsync(newIngredient)
+      .then(() => {
+        setIsNewIngredientInputShown(false)
+        return Promise.resolve();
+      })
       .then(fetchBannedIngredientsAsync);
   }
 
   function fetchBannedIngredientsAsync() {
     backendService.getBannedIngredientsAsync()
       .then(ingredients => setBannedIngredients(ingredients));
+  }
+
+  function generateShowIngredientInputButton() {
+    return (
+    <Grid item xs={12} container alignItems="center" onClick={() => setIsNewIngredientInputShown(true)}>
+      <Grid item>
+        <AddCircleIcon/>
+      </Grid>
+      <Grid item>
+        <Typography variant="body1">Додати складову</Typography>
+      </Grid>
+    </Grid>);
+  }
+
+  function generateNewIngredientInput() {
+    return (
+      <Grid item container xs={12}>
+        <Grid item>
+          <TextField label="Нова складова" variant="outlined" value={newIngredient} onChange={event => setNewIngredient(event.target.value)}/>
+        </Grid>
+        <Grid item>
+          <IconButton onClick={handleAddIngredient}>
+            <DoneIcon />
+          </IconButton>
+          <IconButton onClick={() => setIsNewIngredientInputShown(false)}>
+            <ClearIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
+    );
   }
 }
