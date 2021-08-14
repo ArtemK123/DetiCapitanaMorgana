@@ -7,23 +7,27 @@ import Navigation from './components/Navigation';
 import LoginPage from './pages/login/LoginPage';
 import RegisterPage from './pages/register/RegisterPage';
 import RulesPage from './pages/rules/RulesPage';
+import {useState} from "react";
+import isUserAuthenticated from "./services/isUserAuthenticated";
 
 function App() {
+  let [isAuthenticated, setIsAuthenticated] = useState(isUserAuthenticated());
+
   return (
     <BrowserRouter>
-      <Navigation/>
+      <Navigation isAuthenticated={isAuthenticated}/>
       <Switch>
         <Route path="/login">
-          <LoginPage />
+          <LoginPage setIsAuthenticated={setIsAuthenticated}/>
         </Route>
         <Route path="/register">
           <RegisterPage />
         </Route>
         <Route path="/product">
-          <ProductPage />
+          <ProductPage setIsAuthenticated={setIsAuthenticated}/>
         </Route>
         <Route path="/rules">
-          <RulesPage />
+          <RulesPage setIsAuthenticated={setIsAuthenticated}/>
         </Route>
         <Route path="/">
           <Landing />

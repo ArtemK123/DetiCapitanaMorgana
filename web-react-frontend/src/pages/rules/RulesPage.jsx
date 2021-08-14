@@ -7,7 +7,8 @@ import isUserAuthenticated from "../../services/isUserAuthenticated";
 import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-export default function RulesPage() {
+export default function RulesPage(props) {
+  props.setIsAuthenticated(isUserAuthenticated())
   const [bannedIngredients, setBannedIngredients] = useState(undefined);
   const backendService = new BackendService();
 
@@ -17,8 +18,8 @@ export default function RulesPage() {
 
   if (!bannedIngredients) {
     backendService.getRules()
-      .then(ingredients => setBannedIngredients(ingredients));    
-    
+      .then(ingredients => setBannedIngredients(ingredients));
+
     return <Loader></Loader>
   }
 

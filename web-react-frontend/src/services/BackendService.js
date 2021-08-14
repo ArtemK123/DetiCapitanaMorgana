@@ -63,6 +63,17 @@ const products = [
 
 const rules = ["цукор", "кофеїн"];
 
+let users = [
+    {
+      Id:1,
+      Login:"Login",
+      Password:"Password",
+      Name:"Name",
+      Surname:"Surname",
+      IngredientExceptionSettings:["IngredientsTest"]
+    }
+]
+
 export default class BackendService {
   async getProductAsync(id) {
     const product = products.find(currentProduct => currentProduct.Id === id);
@@ -71,5 +82,11 @@ export default class BackendService {
 
   async getRules() {
     return Promise.resolve(rules);
+  }
+
+  async login(login, password){
+    return Promise.resolve(users.find(user => {
+        return user.Password === password && user.Login === login;
+    }))
   }
 }
