@@ -73,26 +73,25 @@ let users = [
 ]
 
 export default class BackendService {
-  constructor() {
-    this.bannedIngredients = ["цукор", "кофеїн"];
-  }
-
   async getProductAsync(id) {
     const product = products.find(currentProduct => currentProduct.Id === id);
     return Promise.resolve({ ...product, "Id": id });
   }
 
   async addBannedIngredientAsync(ingredient) {
-    this.bannedIngredients.push(ingredient);
+    const bannedIngredients = this.__getBannedIngredients();
+    bannedIngredients.push(ingredient);
+    this.__saveBannedIngredients(bannedIngredients);
     return Promise.resolve();
   }
 
   async getBannedIngredientsAsync() {
-    return Promise.resolve(this.bannedIngredients);
+    return Promise.resolve(this.__getBannedIngredients());
   }
 
   async deleteBannedIngredientAsync(ingredient) {
-    this.bannedIngredients = this.bannedIngredients.filter(elem => elem !== ingredient);
+    const bannedIngredients = this.__getBannedIngredients().filter(elem => elem !== ingredient);
+    this.__saveBannedIngredients(bannedIngredients);
     return Promise.resolve();
   }
 
@@ -105,12 +104,22 @@ export default class BackendService {
   async logoutAsync() {
     localStorage.removeItem("user");
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("bannedIngredients");
     return Promise.resolve();
   }
 
   async checkBannedIngredientsInProductAsync(productId) {
     const product = await this.getProductAsync(productId);
-    const bannedIngredientsInProduct = product.Ingredients.filter(ingredient => this.bannedIngredients.includes(ingredient));
+    const bannedIngredients = this.__getBannedIngredients();
+    const bannedIngredientsInProduct = product.Ingredients.filter(ingredient => bannedIngredients.includes(ingredient));
     return Promise.resolve(bannedIngredientsInProduct);
+  }
+
+  __getBannedIngredients() {
+    return JSON.parse(localStorage.getItem("bannedIngredients"));
+  }
+
+  __saveBannedIngredients(bannedIngredients) {
+    localStorage.setItem("bannedIngredients", JSON.stringify(bannedIngredients))
   }
 }

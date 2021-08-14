@@ -23,12 +23,12 @@ export default function LoginPage({setIsAuthenticated}) {
     function onSubmit() {
         backendService.login(loginValue, passwordValue).then(userValue => {
             if(userValue){
-                localStorage.setItem("user", JSON.stringify(userValue))
-                localStorage.setItem("isLoggedIn", "true")
-                let path = `/`;
-                console.log(setIsAuthenticated)
-                setIsAuthenticated(isUserAuthenticated())
-                history.push(path);
+                localStorage.setItem("user", JSON.stringify(userValue));
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("bannedIngredients", JSON.stringify(['цукор', 'кофеїн']));
+                console.log(setIsAuthenticated);
+                setIsAuthenticated(isUserAuthenticated());
+                history.push("/");
             }
         })
         setWasSubmitPressed({value:true});
