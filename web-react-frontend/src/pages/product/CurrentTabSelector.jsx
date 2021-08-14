@@ -11,11 +11,15 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
   },
+  tabs: {
+    color: "black",
+    backgroundColor: "white",
+    indicatorColor: "darkorange"
+  }
 }));
 
 export default function CurrentTabSelector({currentTab, setCurrentTab}) {
@@ -27,7 +31,7 @@ export default function CurrentTabSelector({currentTab, setCurrentTab}) {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Tabs value={currentTab} onChange={handleChange} aria-label="simple tabs example">
+        <Tabs className={classes.tabs} value={currentTab} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Інформація" {...a11yProps(0)} />
           <Tab label="Склад" {...a11yProps(1)} />
           <Tab label="Поживна цінність" {...a11yProps(2)} />
