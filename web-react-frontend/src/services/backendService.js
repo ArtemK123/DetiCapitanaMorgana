@@ -61,9 +61,15 @@ const products = [
   }
 ];
 
+const rules = ["цукор", "кофеїн"];
+
 export default class BackendService {
   async getProductAsync(id) {
     const product = products.find(currentProduct => currentProduct.Id === id);
     return Promise.resolve({ ...product, "Id": id });
+  }
+
+  async getRules() {
+    return Promise.resolve(rules);
   }
 }
