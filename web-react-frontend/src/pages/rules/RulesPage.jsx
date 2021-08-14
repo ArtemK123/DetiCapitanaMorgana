@@ -16,9 +16,7 @@ export default function RulesPage() {
   }
 
   if (!bannedIngredients) {
-    backendService.getRules()
-      .then(ingredients => setBannedIngredients(ingredients));    
-    
+    fetchBannedIngredientsAsync();
     return <Loader></Loader>
   }
 
@@ -32,24 +30,36 @@ export default function RulesPage() {
           <Typography variant="body2">Виберіть складові, які ви бажаєте відслідковувати.</Typography>
           <Typography variant="body2">Ми попередимо вас, якщо знайдемо ці продукти у складі відсканованих товарах.</Typography>
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <Typography variant="body1">Наразі відслідковуються:</Typography>
-          <List>
-            {bannedIngredients.map(ingredient =>
-              <ListItem key={ingredient} xs={12}>
-                <ListItemIcon>
-                  <ArrowForwardIosRoundedIcon/>
-                </ListItemIcon>
-                <ListItemText primary={ingredient}/>
-                <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-              </ListItem>
-            )}
-          </List>
+          <Box maxWidth={600}>
+            <List>
+              {bannedIngredients.map(ingredient =>
+                <ListItem key={ingredient} xs={12}>
+                  <ListItemIcon>
+                    <ArrowForwardIosRoundedIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary={ingredient}/>
+                  <ListItemSecondaryAction>
+                      <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteIngredient(ingredient)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                </ListItem>
+              )}
+            </List>
+          </Box>
         </Grid>
       </Grid>
     </Box>);
+
+  function fetchBannedIngredientsAsync() {
+    backendService.getBannedIngredientsAsync()
+      .then(ingredients => setBannedIngredients(ingredients));
+  }
+
+  function handleDeleteIngredient(ingredient) {
+    backendService.deleteBannedIngredientAsync(ingredient)
+      .then(fetchBannedIngredientsAsync);
+  }
 }

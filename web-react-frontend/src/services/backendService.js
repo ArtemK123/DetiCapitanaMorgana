@@ -61,7 +61,7 @@ const products = [
   }
 ];
 
-const rules = ["цукор", "кофеїн"];
+let bannedIngredients = ["цукор", "кофеїн"];
 
 export default class BackendService {
   async getProductAsync(id) {
@@ -69,7 +69,12 @@ export default class BackendService {
     return Promise.resolve({ ...product, "Id": id });
   }
 
-  async getRules() {
-    return Promise.resolve(rules);
+  async getBannedIngredientsAsync() {
+    return Promise.resolve(bannedIngredients);
+  }
+
+  async deleteBannedIngredientAsync(ingredient) {
+    bannedIngredients = bannedIngredients.filter(elem => elem !== ingredient);
+    return Promise.resolve();
   }
 }
