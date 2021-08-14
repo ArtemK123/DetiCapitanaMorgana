@@ -1,7 +1,7 @@
 import './App.css';
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Landing from './pages/landing/Landing';
+import LandingPage from './pages/landing/LandingPage';
 import ProductPage from './pages/product/ProductPage';
 import Navigation from './components/Navigation';
 import LoginPage from './pages/login/LoginPage';
@@ -34,7 +34,7 @@ function App() {
           <LogoutComponent setIsAuthenticated={setIsAuthenticated}/>
         </Route>
         <Route path="/">
-          <Landing />
+          <LandingPage />
         </Route>
       </Switch>
     </BrowserRouter>
