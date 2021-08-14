@@ -41,7 +41,7 @@ export default function InformationTab({productInfo}) {
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h6" component="p">Кількість: {productInfo.Weight}</Typography>
+          <Typography variant="h6" component="p">Кількість: {productInfo.Amount}</Typography>
         </Grid>
         <Grid item xs={12} container spacing={3} justifyContent="space-evenly">
           <Grid container item xs={12}>
