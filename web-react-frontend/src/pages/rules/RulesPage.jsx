@@ -10,12 +10,12 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import DoneIcon from '@material-ui/icons/Done';
 import ClearIcon from '@material-ui/icons/Clear';
 
+const backendService = new BackendService();
+
 export default function RulesPage() {
   const [bannedIngredients, setBannedIngredients] = useState(undefined);
   const [isNewIngredientInputShown, setIsNewIngredientInputShown] = useState(false);
   const [newIngredient, setNewIngredient] = useState("");
-
-  const backendService = new BackendService();
 
   if (!isUserAuthenticated()) {
     return (<Redirect to="/"/>);
@@ -68,7 +68,8 @@ export default function RulesPage() {
   function handleAddIngredient() {
     backendService.addBannedIngredientAsync(newIngredient)
       .then(() => {
-        setIsNewIngredientInputShown(false)
+        setIsNewIngredientInputShown(false);
+        setNewIngredient("");
         return Promise.resolve();
       })
       .then(fetchBannedIngredientsAsync);
