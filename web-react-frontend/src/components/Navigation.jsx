@@ -42,7 +42,7 @@ export default function Navigation({isAuthenticated}) {
                         {isAuthenticated && 
                         <ListItem button component={Link} to={"/rules"}>
                           <ListItemIcon><AccountBoxIcon/></ListItemIcon>
-                          <ListItemText primary={"Небажані складовими"}/>
+                          <ListItemText primary={"Небажані складові"}/>
                         </ListItem>}
                         {isAuthenticated && 
                         <ListItem button component={Link} to={"/logout"}>
