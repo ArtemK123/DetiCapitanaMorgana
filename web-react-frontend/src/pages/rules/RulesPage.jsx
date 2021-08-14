@@ -6,6 +6,7 @@ import BackendService from "../../services/BackendService";
 import isUserAuthenticated from "../../services/isUserAuthenticated";
 import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export default function RulesPage() {
   const [bannedIngredients, setBannedIngredients] = useState(undefined);
@@ -41,25 +42,40 @@ export default function RulesPage() {
                   </ListItemIcon>
                   <ListItemText primary={ingredient}/>
                   <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteIngredient(ingredient)}>
-                        <DeleteIcon />
-                      </IconButton>
-                    </ListItemSecondaryAction>
+                    <IconButton edge="end" onClick={() => handleDeleteIngredient(ingredient)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
                 </ListItem>
               )}
             </List>
+            <Box onClick={() => handleAddIngredient()}>
+              <Grid container spacing={1} alignItems="center">
+                <Grid item>
+                  <AddCircleIcon/>
+                </Grid>
+                <Grid item>
+                  <Typography variant="body1">Додати складову</Typography>
+                </Grid>
+              </Grid>
+            </Box>
           </Box>
         </Grid>
       </Grid>
     </Box>);
 
-  function fetchBannedIngredientsAsync() {
-    backendService.getBannedIngredientsAsync()
-      .then(ingredients => setBannedIngredients(ingredients));
-  }
-
   function handleDeleteIngredient(ingredient) {
     backendService.deleteBannedIngredientAsync(ingredient)
       .then(fetchBannedIngredientsAsync);
+  }
+
+  function handleAddIngredient() {
+    backendService.addBannedIngredientAsync("Test")
+      .then(fetchBannedIngredientsAsync);
+  }
+
+  function fetchBannedIngredientsAsync() {
+    backendService.getBannedIngredientsAsync()
+      .then(ingredients => setBannedIngredients(ingredients));
   }
 }

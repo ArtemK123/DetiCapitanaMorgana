@@ -61,20 +61,27 @@ const products = [
   }
 ];
 
-let bannedIngredients = ["цукор", "кофеїн"];
-
 export default class BackendService {
+  constructor() {
+    this.bannedIngredients = ["цукор", "кофеїн"];
+  }
+
   async getProductAsync(id) {
     const product = products.find(currentProduct => currentProduct.Id === id);
     return Promise.resolve({ ...product, "Id": id });
   }
 
+  async addBannedIngredientAsync(ingredient) {
+    this.bannedIngredients.push(ingredient);
+    return Promise.resolve();
+  }
+
   async getBannedIngredientsAsync() {
-    return Promise.resolve(bannedIngredients);
+    return Promise.resolve(this.bannedIngredients);
   }
 
   async deleteBannedIngredientAsync(ingredient) {
-    bannedIngredients = bannedIngredients.filter(elem => elem !== ingredient);
+    this.bannedIngredients = this.bannedIngredients.filter(elem => elem !== ingredient);
     return Promise.resolve();
   }
 }
