@@ -61,6 +61,17 @@ const products = [
   }
 ];
 
+let users = [
+    {
+      Id:1,
+      Login:"Login",
+      Password:"Password",
+      Name:"Name",
+      Surname:"Surname",
+      IngredientExceptionSettings:["IngredientsTest"]
+    }
+]
+
 export default class BackendService {
   constructor() {
     this.bannedIngredients = ["цукор", "кофеїн"];
@@ -83,5 +94,11 @@ export default class BackendService {
   async deleteBannedIngredientAsync(ingredient) {
     this.bannedIngredients = this.bannedIngredients.filter(elem => elem !== ingredient);
     return Promise.resolve();
+  }
+
+  async login(login, password){
+    return Promise.resolve(users.find(user => {
+        return user.Password === password && user.Login === login;
+    }))
   }
 }

@@ -12,7 +12,8 @@ import ClearIcon from '@material-ui/icons/Clear';
 
 const backendService = new BackendService();
 
-export default function RulesPage() {
+export default function RulesPage(props) {
+  props.setIsAuthenticated(isUserAuthenticated())
   const [bannedIngredients, setBannedIngredients] = useState(undefined);
   const [isNewIngredientInputShown, setIsNewIngredientInputShown] = useState(false);
   const [newIngredient, setNewIngredient] = useState("");

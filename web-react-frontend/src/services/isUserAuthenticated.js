@@ -1,3 +1,4 @@
 export default function isUserAuthenticated() {
-  return true;
+  let isLoggedIn = localStorage.getItem("isLoggedIn");
+  return !!isLoggedIn && isLoggedIn === "true";
 }
