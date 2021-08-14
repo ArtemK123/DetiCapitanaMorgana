@@ -10,17 +10,13 @@ import HomeIcon from '@material-ui/icons/Home';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import {Link} from 'react-router-dom';
-import isUserAuthenticated from "../services/isUserAuthenticated";
 
 const useStyles = makeStyles({
-    list: {
-        width: 250,
-    },
-    fullList: {
-        width: 'auto',
+    root: {
+      backgroundColor: "darkorange"
     },
     burger: {
-        margin: '20px'
+      margin: '20px'
     }
 });
 
@@ -33,7 +29,7 @@ export default function Navigation({isAuthenticated}) {
     };
 
     return (
-        <div>
+        <div className={classes.root}>
             <MenuIcon onClick={toggleDrawer} className={classes.burger}/>
             <Drawer anchor="left" open={isOpen} onClose={toggleDrawer}>
                 <div className={classes.list}>
