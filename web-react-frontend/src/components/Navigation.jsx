@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -11,6 +10,7 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import {Link} from 'react-router-dom';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { SwipeableDrawer } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
@@ -32,7 +32,7 @@ export default function Navigation({isAuthenticated}) {
     return (
         <div className={classes.root}>
             <MenuIcon onClick={toggleDrawer} className={classes.burger}/>
-            <Drawer anchor="left" open={isOpen} onClose={toggleDrawer}>
+            <SwipeableDrawer anchor="left" open={isOpen} onClose={toggleDrawer}>
                 <div className={classes.list}>
                     <List>
                         <ListItem button component={Link} to={"/"}>
@@ -42,7 +42,7 @@ export default function Navigation({isAuthenticated}) {
                         {isAuthenticated && 
                         <ListItem button component={Link} to={"/rules"}>
                           <ListItemIcon><AccountBoxIcon/></ListItemIcon>
-                          <ListItemText primary={"Керування небажаними складовими"}/>
+                          <ListItemText primary={"Небажані складовими"}/>
                         </ListItem>}
                         {isAuthenticated && 
                         <ListItem button component={Link} to={"/logout"}>
@@ -61,7 +61,7 @@ export default function Navigation({isAuthenticated}) {
                         </ListItem>}
                     </List>
                 </div>
-            </Drawer>
+            </SwipeableDrawer>
         </div>
     );
 }
