@@ -1,6 +1,5 @@
-import { Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import Image from 'material-ui-image';
-import bountyImage from './bounty.jpg';
 import WarningIcon from '@material-ui/icons/Warning';
 import { Link } from 'react-router-dom';
 
@@ -26,7 +25,9 @@ export default function InformationTab({productInfo}) {
         </Grid>
         <Grid item xs={12} container justifyContent="center">
           <Grid item xs={8}>
-            <Image src={bountyImage}/>
+            <Box maxWidth="400px">
+              <Image src={productInfo.ImageHref}/>
+            </Box>
           </Grid>
         </Grid>
         <Grid item xs={12} container justifyContent="space-evenly">
@@ -40,7 +41,7 @@ export default function InformationTab({productInfo}) {
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h6" component="p">Вага: {productInfo.Weight}</Typography>
+          <Typography variant="h6" component="p">Кількість: {productInfo.Amount}</Typography>
         </Grid>
         <Grid item xs={12} container spacing={3} justifyContent="space-evenly">
           <Grid container item xs={12}>

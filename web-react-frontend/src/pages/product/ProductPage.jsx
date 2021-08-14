@@ -1,6 +1,6 @@
 import { Box, Typography } from "@material-ui/core";
 import { useState } from "react";
-import BackendService from "../../services/backendService";
+import BackendService from "../../services/BackendService";
 import InformationTab from "./InformationTab/InformationTab";
 import IngredientsTab from "./IngregientsTab/IngredientsTab";
 import NutritionTab from "./NutritionTab/NutritionTab";

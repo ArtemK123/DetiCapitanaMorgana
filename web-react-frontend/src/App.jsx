@@ -3,9 +3,10 @@ import './App.css';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Landing from './pages/landing/Landing';
 import ProductPage from './pages/product/ProductPage';
-import Navigation from './components/navigation/Navigation';
+import Navigation from './components/Navigation';
 import LoginPage from './pages/login/LoginPage';
 import RegisterPage from './pages/register/RegisterPage';
+import RulesPage from './pages/rules/RulesPage';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         </Route>
         <Route path="/product">
           <ProductPage />
+        </Route>
+        <Route path="/rules">
+          <RulesPage />
         </Route>
         <Route path="/">
           <Landing />
