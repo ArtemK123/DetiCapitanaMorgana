@@ -1,22 +1,23 @@
-import { Box, Grid, Typography } from "@material-ui/core";
+import { Box, Grid, IconButton, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Typography } from "@material-ui/core";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import Loader from "../../components/Loader";
-import TextItemList from "../../components/TextItemList";
 import BackendService from "../../services/BackendService";
 import isUserAuthenticated from "../../services/isUserAuthenticated";
+import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export default function RulesPage() {
-  const [rules, setRules] = useState(undefined);
+  const [bannedIngredients, setBannedIngredients] = useState(undefined);
   const backendService = new BackendService();
 
   if (!isUserAuthenticated()) {
     return (<Redirect to="/"/>);
   }
 
-  if (!rules) {
+  if (!bannedIngredients) {
     backendService.getRules()
-      .then(fetchedRules => setRules(fetchedRules));    
+      .then(ingredients => setBannedIngredients(ingredients));    
     
     return <Loader></Loader>
   }
@@ -33,7 +34,21 @@ export default function RulesPage() {
         </Grid>
         <Grid item>
           <Typography variant="body1">Наразі відслідковуються:</Typography>
-          <TextItemList items={rules}></TextItemList>
+          <List>
+            {bannedIngredients.map(ingredient =>
+              <ListItem key={ingredient} xs={12}>
+                <ListItemIcon>
+                  <ArrowForwardIosRoundedIcon/>
+                </ListItemIcon>
+                <ListItemText primary={ingredient}/>
+                <ListItemSecondaryAction>
+                    <IconButton edge="end" aria-label="delete">
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+              </ListItem>
+            )}
+          </List>
         </Grid>
       </Grid>
     </Box>);
